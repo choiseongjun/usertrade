@@ -15,7 +15,7 @@ import org.test.usedtrade.user.jwt.JwtService;
 import org.test.usedtrade.user.service.UserService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;

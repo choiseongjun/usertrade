@@ -1,29 +1,28 @@
-package org.test.usedtrade.user.security;
+package org.test.usedtrade.user.service;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.test.usedtrade.user.entity.User;
-import org.test.usedtrade.user.entity.UserRole;
+import org.test.usedtrade.user.entity.UserInfoEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomUserDetails extends User implements UserDetails {
-    private String email;
+public class CustomUserDetailsInfo extends UserInfoEntity implements UserDetails {
+
+    private String username;
     private String password;
     Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(User byUsername) {
-        this.email = byUsername.getEmail();
+    public CustomUserDetailsInfo(UserInfoEntity byUsername) {
+        this.username = byUsername.getEmail();
         this.password= byUsername.getPassword();
         List<GrantedAuthority> auths = new ArrayList<>();
 
-        for(UserRole role : byUsername.getRoles()){
-
-            auths.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
-        }
+//        for(UserRole role : byUsername.getRoles()){
+//
+//            auths.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
+//        }
         this.authorities = auths;
     }
 
@@ -39,7 +38,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

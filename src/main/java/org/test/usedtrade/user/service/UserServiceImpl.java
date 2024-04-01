@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.test.usedtrade.user.dto.req.RequestLoginUserDto;
 import org.test.usedtrade.user.dto.req.UserRequestDto;
 import org.test.usedtrade.user.dto.res.UserResponseDto;
-import org.test.usedtrade.user.entity.User;
+import org.test.usedtrade.user.entity.UserInfoEntity;
 import org.test.usedtrade.user.entity.UserRole;
 import org.test.usedtrade.user.repository.UserRepository;
 
@@ -31,13 +31,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserResponseDto getUserDetailsByEmail(String email) {
-        User user = userRepository.findByEmail(email);
+        UserInfoEntity userInfoEntity = userRepository.findByEmail(email);
 
-        if(user==null){
+        if(userInfoEntity ==null){
             throw new UsernameNotFoundException(email);
         }
         UserResponseDto userDto = new UserResponseDto();
-        return userDto.fromReponseDtoUser(user);
+        return userDto.fromReponseDtoUser(userInfoEntity);
     }
 
     @Override
@@ -52,15 +52,19 @@ public class UserServiceImpl implements UserService{
         Set<UserRole> roleSet = new HashSet<>();
         roleSet.add(userRole);
 
+        int userCnt = userRepository.countByEmail(userRequest.getEmail());
+        if(userCnt>0) {
+            throw new IllegalArgumentException("exist argument: " + userRequest.getEmail());
+        }
 
-        User user = new User();
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
         String encodedPassword = encoder.encode(userRequest.getPassword());
-        user.setEmail(userRequest.getEmail());
-        user.setPassword(encodedPassword);
+        userInfoEntity.setEmail(userRequest.getEmail());
+        userInfoEntity.setPassword(encodedPassword);
 
-        user.setRoles(roleSet);
-        User rtnUser =  userRepository.save(user);
-        return UserResponseDto.fromReponseDtoUser(rtnUser);
+//        userEntity.setRoles(roleSet);
+        UserInfoEntity rtnUserInfoEntity =  userRepository.save(userInfoEntity);
+        return UserResponseDto.fromReponseDtoUser(rtnUserInfoEntity);
     }
 
 //    @Override

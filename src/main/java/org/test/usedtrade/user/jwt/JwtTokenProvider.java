@@ -1,8 +1,9 @@
-package org.test.usedtrade.user.jwt;//package org.test.userservice.user.jwt;
+//package org.test.usedtrade.user.jwt;//package org.test.userservice.user.jwt;
 //
 //import io.jsonwebtoken.*;
 //import io.jsonwebtoken.security.Keys;
 //import lombok.RequiredArgsConstructor;
+//import org.springframework.core.env.Environment;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
@@ -13,13 +14,14 @@ package org.test.usedtrade.user.jwt;//package org.test.userservice.user.jwt;
 //import java.nio.charset.StandardCharsets;
 //import java.security.Key;
 //import java.util.ArrayList;
+//import java.util.Date;
 //
 //@Component
 //@RequiredArgsConstructor
 //public class JwtTokenProvider {
 //
 //    private final Environment env;
-//    private final MyUserDetailsService myUserDetailsService;
+////    private final MyUserDetailsService myUserDetailsService`;
 //
 //    public String generateAccessToken(Authentication authentication) {
 //        // HMAC SHA-512 알고리즘으로 생성된 Secret Key 생성

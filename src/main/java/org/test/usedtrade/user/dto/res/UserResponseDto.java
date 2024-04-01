@@ -4,30 +4,31 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.test.usedtrade.user.entity.User;
+import org.test.usedtrade.user.entity.UserInfoEntity;
 
 import java.io.Serializable;
 
 /**
- * DTO for {@link User}
+ * DTO for {@link UserInfoEntity}
  */
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseDto implements Serializable {
-    Long userId;
+    Long id;
     String email;
     String password;
     String nickName;
 
 
-    public static UserResponseDto fromReponseDtoUser(User user){
+
+    public static UserResponseDto fromReponseDtoUser(UserInfoEntity userInfoEntity){
         return UserResponseDto.builder()
-                .userId(user.getUserId())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .nickName(user.getNickName())
+                .id(userInfoEntity.getId())
+                .email(userInfoEntity.getEmail())
+                .password(userInfoEntity.getPassword())
+                .nickName(userInfoEntity.getNickName())
                 .build();
     }
 }
